@@ -12,7 +12,7 @@ Clone this repo to your local machine using
 git clone https://github.com/remla23-team15/app.git
 ```
 
-#### Build (linux)
+#### Build
 
 Move to  the application folder and run in your terminal:
 
