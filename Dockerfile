@@ -1,26 +1,26 @@
-## Specify the base image
-#FROM node:16
-#
-## Set the working directory
-#WORKDIR /app
-#
-## Copy the package.json and package-lock.json files
-#COPY package*.json ./
-#
-## Install dependencies
-#RUN npm install
-#
-## Copy the rest of the application code
-#COPY . .
-#
-## Specify the command to start the application
-#CMD ["npm", "start"]
+# Use official node image as the base image
+FROM node:lts-alpine as build
 
-# Specify the base image
-FROM nginx:alpine
+ARG npm_token
+ENV NPM_TOKEN $npm_token
 
-# Copy the nginx configuration file
-#COPY nginx.conf /etc/nginx/nginx.conf
+# Set the working directory
+WORKDIR /usr/local/app
 
-# Copy the application code to the default Nginx root directory
-COPY . /usr/share/nginx/html
+# Add the source code to app
+COPY ./ /usr/local/app/
+
+# Install all the dependencies
+RUN npm install
+
+# Generate the build of the application
+RUN npm run build
+
+# Use official nginx image as the base image
+FROM nginx:stable-alpine
+
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /usr/local/app/src /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
