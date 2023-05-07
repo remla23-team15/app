@@ -15,9 +15,14 @@ git clone https://github.com/remla23-team15/app.git
 #### Run
 Move to  the application folder and run in your terminal:
 ```
-# Add GitHub Personal Access Token to environment
+# Add GitHub Personal Access Token to environment (linux)
 export NPM_TOKEN=the_token_goes_here
 
+# Add GitHub Personal Access Token to environment (windows)
+set NPM_TOKEN=the_token_goes_here
+```
+
+```
 # Docker build
 docker build -t ghcr.io/remla23-team15/app:VERSION --build-arg npm_token=${NPM_TOKEN} .
 
