@@ -1,0 +1,43 @@
+{
+  "name": "@remla23-team15/app",
+  "version": "1.0.0",
+  "description": "Frontend app for restaurant reviews sentiment analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o src/bundle.js",
+    "watch": "watchify index.js -o src/bundle.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remla23-team15/app.git"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
+  "author": "remla23-team15",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remla23-team15/app/issues"
+  },
+  "homepage": "https://github.com/remla23-team15/app#readme",
+  "dependencies": {
+    "@remla23-team15/lib": "^1.0.1",
+    "browserify": "^17.0.0",
+    "watchify": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0"
+  }
+}
