@@ -19,6 +19,9 @@ RUN npm run build
 # Use official nginx image as the base image
 FROM nginx:stable-alpine
 
+# Configure Nginx
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/local/app/src /usr/share/nginx/html
 
