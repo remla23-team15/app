@@ -8,7 +8,7 @@ ENV NPM_TOKEN $npm_token
 WORKDIR /usr/local/app
 
 # Add the source code to app
-COPY ./ /usr/local/app/
+COPY . .
 
 # Install all the dependencies
 RUN npm install
@@ -20,10 +20,17 @@ RUN npm run build
 FROM nginx:stable-alpine
 
 # Configure Nginx
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx.conf.template /etc/nginx/nginx.conf.template
 
-# Copy the build output to replace the default nginx contents.
+# Copy the build output to replace the default nginx contents
 COPY --from=build /usr/local/app/src /usr/share/nginx/html
+
+# Copy docker entrypoint
+COPY docker-entrypoint.sh /
+RUN chmod +x docker-entrypoint.sh
 
 # Expose port 80
 EXPOSE 80
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

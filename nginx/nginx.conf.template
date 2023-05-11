@@ -36,8 +36,8 @@ http {
                 try_files $uri /index.html;
         }
 
-        location /predict {
-                proxy_pass http://model-service-serv:8080;
+        location ${MY_APP_URL} {
+                proxy_pass http://${BACKEND_HOST};
         }
     }
 }
