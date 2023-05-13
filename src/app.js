@@ -25,5 +25,30 @@ async function submit() {
     else {
         document.getElementById('result').innerText = ":(";
     }
+
+    // Show feedback elements
+    document.getElementById('SubmitBtn').style.visibility = 'hidden';
+    document.getElementById('feedbackSubmit').style.visibility = 'visible';
+    document.getElementById('feedbackMessage').style.visibility = 'hidden';
 }
 
+async function submitFeedback(feedback) {
+    // Get feedback url from env variables
+    const feedbackBackendUrl = feedbackUrl();
+
+    let content = {'feedback':parseInt(feedback)};
+
+    let params = {
+        headers: {'Content-Type':'application/json'},
+        method: 'POST',
+        body: JSON.stringify(content)
+    }
+
+    const response = await fetch(feedbackBackendUrl, params).then((response) => response.json());
+    console.log(response['model_accuracy']);
+
+    // Hide feedback elements
+    document.getElementById('SubmitBtn').style.visibility = 'visible';
+    document.getElementById('feedbackSubmit').style.visibility = 'hidden';
+    document.getElementById('feedbackMessage').style.visibility = 'visible';
+}

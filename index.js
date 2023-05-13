@@ -14,3 +14,7 @@ Object.keys(env_vars).forEach(function(k) {
 window.backEndUrl = () => {
     return process.env.MY_APP_URL;
 }
+
+window.feedbackUrl = () => {
+    return process.env.MY_APP_FEEDBACK;
+}

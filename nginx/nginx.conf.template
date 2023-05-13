@@ -39,5 +39,13 @@ http {
         location ${MY_APP_URL} {
                 proxy_pass http://${BACKEND_HOST};
         }
+
+        location ${MY_APP_FEEDBACK} {
+                proxy_pass http://${BACKEND_HOST};
+        }
+
+        location /apidocs {
+                proxy_pass http://${BACKEND_HOST};
+        }
     }
 }

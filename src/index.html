@@ -7,9 +7,19 @@
 <body>
     <h1>Restaurant Reviews Sentiment Analysis</h1>
     <h4>v<span id="version"></span></h4>
-    <textarea id="textInput" rows="50" cols="200"></textarea>
+    <textarea id="textInput" rows="25" cols="200"></textarea>
     <h5 id="result">Result</h5>
     <button id="SubmitBtn" onclick="submit()" style="height:50px;width:100px">Submit</button>
+
+    <div id="feedbackSubmit" style="visibility: hidden;">
+        <h5 id="feedback">Provide Feedback</h5>
+        <button id="positiveFeedbackBtn" onclick="submitFeedback(1)" style="height:50px;width:100px">Correct</button>
+        <button id="negativeFeedbackBtn" onclick="submitFeedback(0)" style="height:50px;width:100px">Incorrect</button>
+    </div>
+
+    <div id="feedbackMessage" style="visibility: hidden;">
+        <h4>Feedback received, thank you!</h4>
+    </div>
 
     <script src="bundle.js"></script>
     <script src="app.js"></script>
