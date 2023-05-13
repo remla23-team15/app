@@ -44,7 +44,7 @@ http {
                 proxy_pass http://${BACKEND_HOST};
         }
 
-        location /apidocs {
+        location /metrics {
                 proxy_pass http://${BACKEND_HOST};
         }
     }
