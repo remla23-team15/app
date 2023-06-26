@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>REMLA-Team 15</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Restaurant Reviews Sentiment Analysis</h1>
+    <div class="content">
+
+    <h1 id="title">Restaurant 15 Review Sentiment Analysis</h1>
     <h4>v<span id="version"></span></h4>
-    <textarea id="textInput" rows="25" cols="200"></textarea>
-    <h5 id="result">Result</h5>
+    <img class="logo" src="Logo.png" alt="Logo"> <br>
+
+    <br>
+
+    <h3>Please also provide a rating</h3>
+    <div> <span>0</span> <input id="ratingSlider" type="range" min="0" max="10" step="0.1" oninput="getAndDisplaySliderValue()" /> <span>10</span> </div>
+    <div> <span>Rating: </span></span> <output id="sliderValue">5</output> </div> <br>
+    <textarea id="textInput" rows="25" cols="100"></textarea>
+    <h3>Predicted sentiment result:</h3>
+    <h3 id="result" style="color: Red"></h3>
     <button id="SubmitBtn" onclick="submit()" style="height:75px;width:150px">Submit</button>
 
     <div id="feedbackSubmit" style="visibility: hidden;">
         <h5 id="feedback">Provide Feedback</h5>
-        <button id="positiveFeedbackBtn" onclick="submitFeedback(1)" style="height:100px;width:200px">Correct</button>
+        <button id="positiveFeedbackBtn" onclick="submitFeedback(1)" style="height:50px;width:100px">Correct</button>
         <button id="negativeFeedbackBtn" onclick="submitFeedback(0)" style="height:50px;width:100px">Incorrect</button>
     </div>
 
     <div id="feedbackMessage" style="visibility: hidden;">
         <h4>Feedback received, thank you!</h4>
     </div>
+    </div>
+
 
     <script src="bundle.js"></script>
     <script src="app.js"></script>
+
 </body>
 </html>
