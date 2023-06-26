@@ -1,0 +1,29 @@
+body {
+  background: linear-gradient(to bottom, lightblue, cornflowerblue);
+}
+
+.content {
+  max-width: 800px;
+  margin: auto;
+
+  background: linear-gradient(to bottom, #e8c6c7, #fbf1a9);
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  border: 1px solid black;
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content * {
+  border-radius: 10px;
+}
+
+.logo {
+  border: 1px solid black;
+}

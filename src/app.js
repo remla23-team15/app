@@ -20,10 +20,13 @@ async function submit() {
     console.log(response['result']);
 
     if(response['result'] === "positive") {
-        document.getElementById('result').innerText = ":)";
+        document.getElementById('result').innerText = "Positive &#128513";
+        document.getElementById('result').style.color = "Green";
     }
     else {
-        document.getElementById('result').innerText = ":(";
+        document.getElementById('result').innerText = "Negative &#128544";
+        document.getElementById('result').style.color = "Red";
+
     }
 
     // Show feedback elements
@@ -51,4 +54,10 @@ async function submitFeedback(feedback) {
     document.getElementById('SubmitBtn').style.visibility = 'visible';
     document.getElementById('feedbackSubmit').style.visibility = 'hidden';
     document.getElementById('feedbackMessage').style.visibility = 'visible';
+}
+
+function getAndDisplaySliderValue() {
+    var slider = document.getElementById("ratingSlider");
+    var sliderValue = document.getElementById("sliderValue");
+    sliderValue.innerHTML = slider.value;
 }
