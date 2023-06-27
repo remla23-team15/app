@@ -23,11 +23,11 @@ async function submit() {
     console.log(response['result']);
 
     if(response['result'] === "positive") {
-        document.getElementById('result').innerText = "Positive &#128513";
+        document.getElementById('result').innerText = "Positive :)";
         document.getElementById('result').style.color = "Green";
     }
     else {
-        document.getElementById('result').innerText = "Negative &#128544";
+        document.getElementById('result').innerText = "Negative :(";
         document.getElementById('result').style.color = "Red";
 
     }
