@@ -31,28 +31,90 @@ window.feedbackUrl = function () {
 
 }).call(this)}).call(this,require('_process'))
 },{"./env.json":1,"@remla23-team15/lib":3,"_process":5}],3:[function(require,module,exports){
+// General functions
 /**
- * VersionUtil class.
+ * Get repository latest versioned tag from GitHub API.
+ *
+ * @param url The repository URL.
+ * @returns {Promise<string>} The returned latest version.
  */
-class VersionUtil {
-    constructor(version) {
-        this.version = version;
+async function getGitHubRepoLatestVersion(url) {
+    const res = await fetch(url);
+    if (res.ok) {
+        // Parse response to JSON
+        const data = await res.json();
+        if (data.length === 0) {
+            return "version unknown";
+        }
+
+        // Filter versioned tags: vx.x.x
+        const regex = new RegExp('v[0-9]+.[0-9]+.[0-9]+', 'g');
+        const versionedTags = data.filter(tag => tag.name.match(regex));
+        if (versionedTags.length === 0) {
+            return "version unknown";
+        }
+
+        return `${versionedTags[0].name}`;
+    } else {
+        return "version unknown";
     }
 }
 
-// Get version from package file
+// Request the model-service latest version
+/**
+ * Get the model-service repository latest version.
+ *
+ * @returns {Promise<string>} The returned latest version.
+ */
+async function getModelServiceVersion() {
+    return await getGitHubRepoLatestVersion('https://api.github.com/repos/remla23-team15/model-service/tags');
+}
+
+// Request the app latest version
+/**
+ * Get the app repository latest version.
+ *
+ * @returns {Promise<string>} The returned latest version.
+ */
+async function getAppVersion() {
+    return await getGitHubRepoLatestVersion('https://api.github.com/repos/remla23-team15/app/tags');
+}
+
+/**
+ * VersionUtil class.
+ * This class contains the latest versions of the:
+ * - model-service
+ * - lib
+ * - app
+ */
+class VersionUtil {
+    constructor(version) {
+        // Initialize lib version
+        this.libVersion = version;
+
+        // Fetch model-service and app versions
+        getModelServiceVersion().then(modelServiceVersion => {
+            getAppVersion().then(appVersion => {
+                this.modelServiceVersion = modelServiceVersion;
+                this.appVersion = appVersion;
+            });
+        });
+    }
+}
+
+// Init VersionUtil class
 const packageJson = require('./package.json');
 const packageVersion = new VersionUtil(packageJson.version);
 
 // Export the function
 exports.getVersion = () => {
-    return packageVersion.version;
+    return `App components versions:\nmodel-service: ${packageVersion.modelServiceVersion}\nlib: v${packageVersion.libVersion}\napp: ${packageVersion.appVersion}`;
 }
 
 },{"./package.json":4}],4:[function(require,module,exports){
 module.exports={
   "name": "@remla23-team15/lib",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Version-aware library",
   "main": "index.js",
   "scripts": {
