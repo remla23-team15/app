@@ -1,5 +1,8 @@
 // Display version
-currentVersion();
+window.onload = (event) => {
+    document.getElementById("version").innerText = "Loading components versions...";
+    setTimeout(currentVersion, 3000);
+};
 
 async function submit() {
 
