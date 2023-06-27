@@ -1,6 +1,6 @@
 {
   "name": "@remla23-team15/app",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Frontend app for restaurant reviews sentiment analysis",
   "main": "index.js",
   "scripts": {
